@@ -22,7 +22,6 @@ public class BoardConroller {
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)  
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("firstString", "firstValue");
         DataInfors dataInfors = new DataInfors();
         ArrayList<BoardBean> boardList = dataInfors.getDataListWithBoardBean();
         modelAndView.addObject("boardList", boardList);
@@ -32,7 +31,6 @@ public class BoardConroller {
     }
     @RequestMapping(value = "/view", method = RequestMethod.GET)  
     public ModelAndView view(@RequestParam String title, ModelAndView modelAndView) { //spring은 이전에 인스턴스화 되어있다 따라서 매개로 넣으면 바로 사용가능
-        System.out.println(title);
         DataInfors dataInfors = new DataInfors();
         BoardBean boardBean = dataInfors.getDataWithMamberBean(title);
         modelAndView.addObject("boardBean", boardBean);
