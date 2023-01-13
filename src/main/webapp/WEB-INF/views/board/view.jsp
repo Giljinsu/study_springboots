@@ -20,7 +20,7 @@
             <thead>
                 <tr>
                     <th class="col-1" scope=>Title</th>
-                    <td class="col-6">Hello : ${boardBean.title} </td>
+                    <td class="col-6">${boardBean.title} </td>
                     <th>user name </th>
                     <td>${boardBean.userName}</td>
                     <th>date</th>
