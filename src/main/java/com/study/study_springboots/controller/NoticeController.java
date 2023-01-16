@@ -17,7 +17,8 @@ import com.study.study_springboots.service.DataInfors;
 @RequestMapping(value = "/notice")
 public class NoticeController {
         @RequestMapping(value = {"/","/list"})
-        public ModelAndView list(DataInfors dataInfors) {
+        public ModelAndView list() {
+                DataInfors dataInfors = new DataInfors();
                 ArrayList<BoardBean> dataInfo = dataInfors.getDataListWithBoardBean();
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.addObject("dataInfo", dataInfo);
@@ -25,7 +26,8 @@ public class NoticeController {
                 return modelAndView;
         }
         @RequestMapping(value = "/edit/{title}", method = RequestMethod.GET)
-        public ModelAndView view(@PathVariable String title, DataInfors dataInfors) {
+        public ModelAndView view(@PathVariable String title) {
+                DataInfors dataInfors = new DataInfors();
                 ModelAndView modelAndView = new ModelAndView();
                 BoardBean boardBean = dataInfors.getDataWithMamberBean(title);
                 modelAndView.addObject("boardBean", boardBean);
@@ -35,8 +37,9 @@ public class NoticeController {
 
         }
         @RequestMapping(value = "/save", method = RequestMethod.POST)
-        public ModelAndView view(@RequestParam HashMap<String,String> hashMap, DataInfors dataInfors) {
-                BoardBean boardBean = dataInfors.addObject(hashMap);
+        public ModelAndView view(@RequestParam HashMap<String,String> hashMap) {
+                DataInfors dataInfors = new DataInfors();
+                BoardBean boardBean = dataInfors.addDataBean(hashMap);
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.addObject("boardBean", boardBean);
                 modelAndView.setViewName("/notice/view");

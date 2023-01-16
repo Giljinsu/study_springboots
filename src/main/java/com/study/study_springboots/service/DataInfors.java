@@ -92,7 +92,7 @@ public class DataInfors {
         return membersList;
     }
 
-    public BoardBean addObject(HashMap<String,String> hashMap) {
+    public BoardBean addDataBean(HashMap<String,String> hashMap) {
         String title = hashMap.get("title");
         String content = hashMap.get("content");
         String userName = hashMap.get("userName");
