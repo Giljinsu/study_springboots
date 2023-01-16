@@ -24,4 +24,9 @@ public class HomeController {
         int i = 0;
         return "home.html";
     }
+    @RequestMapping(value = "/jstlformats")    // http://localhost:8080/homehtml
+    public String jstlformats(){
+        int i = 0;
+        return "jstl_formats";
+    }
 }

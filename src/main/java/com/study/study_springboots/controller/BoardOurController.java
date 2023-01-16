@@ -1,8 +1,10 @@
 package com.study.study_springboots.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,11 +39,13 @@ public class BoardOurController {
         modelAndView.setViewName("board_our/list");
         return modelAndView;    // --> Dispatcher Servlet
     }
-    @RequestMapping(value = "/view", method = RequestMethod.GET)  
-    public ModelAndView view(@RequestParam String uid, ModelAndView modelAndView) { //spring은 이전에 인스턴스화 되어있다 따라서 매개로 넣으면 바로 사용가능
-        System.out.println(uid);
+    // @RequestMapping(value = "/view", method = RequestMethod.GET)  
+    @RequestMapping(value = "/view/{action_uid}", method = RequestMethod.GET)  //{}안은 변수다 표시
+    public ModelAndView view(@PathVariable String action_uid, ModelAndView modelAndView) { //spring은 이전에 인스턴스화 되어있다 따라서 매개로 넣으면 바로 사용가능
+        // action_uid는 servlet에서 넘어오는 변수야 라는 것을 표현해야함
+        System.out.println(action_uid);
         DataInfors dataInfors = new DataInfors();
-        BoardBean boardBean = dataInfors.getDataWithMamberBean(uid);
+        BoardBean boardBean = dataInfors.getDataWithMamberBean(action_uid);
         modelAndView.addObject("boardBean", boardBean);
 
         modelAndView.setViewName("board_our/view");
@@ -53,8 +57,11 @@ public class BoardOurController {
         modelAndView.setViewName("board_our/form");
         return modelAndView;
     }
-    @RequestMapping(value = "/save", method = RequestMethod.POST)    
-    public ModelAndView save(ModelAndView modelAndView) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    // public ModelAndView save(@RequestParam Hashmap<String,String>, ModelAndView modelAndView) {    
+    public ModelAndView save(BoardBean boardBean, ModelAndView modelAndView) {
+        //BoardBean 이라는것은 spring에 없으니까 찾아본다? 이래서 작동함
+        //주의점 BoardBean의 변수 이름과 form.jsp에서의 이름이 같아야함
         // insert biz
         modelAndView.setViewName("board_our/list");
         return modelAndView;

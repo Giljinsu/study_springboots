@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,81 +22,75 @@
         <div>With Request.getAttribute : <%= firstWithRequest %></div>
     </div>
     <div>
-        <div>With Get Value on Spring : ${firstString}, ${boardList}</div>
+        <div>With Get Value on JSP : ${firstString}, ${boardList}</div>
     </div>
 
-    <div>jstl if</div>
-    
+    <div>jstl if </div>
+    <%--@ if(){ --%>
+        <%-- ... --%>
+    <%--@ } --%>
     <c:if test="${firstString eq 'firstValue'}"> 
         <h3>Matching : String eq 'firstValue'</h3>
-    </c:if>
+    </c:if >
     <c:set var="firstString" value="good" />
-    <c:if test="${firstString ne 'firstValue'}"> 
-        <h3>Matching : String eq 'good'</h3>
-    </c:if>
+    <c:if test="${firstString ne 'firstValue'}">
+        <h3>Not Matching : String eq 'good'</h3>
+    </c:if >
     <c:set var="num_first" value="5" />
     <c:if test="${num_first gt 5}">
-        <h4>greater than 5</h4>
+        <h4> greater than 5 </h4>
     </c:if>
-
-    <div>jstl switch</div>
+    <div>jstl switch </div>
     <c:choose>
         <c:when test="${num_first eq 3}">
-           num_first 3이다
+            num_first eq 3이다
         </c:when>
         <c:when test="${num_first eq 5}">
-            num_first 5이다
+            num_first eq 5이다
         </c:when>
-        <c:otherwise>
+        <c:otherwise >
             num_first 5보다 크다
         </c:otherwise>
     </c:choose>
-
-    <div>jstl for</div>
-    <%-- for문 --%>
-    <%-- for(int i =0 ; i < boardList.size() ; i++)  { --%>
-    <%-- BoardBean value = boardList.get(i); --%>
-    <%-- } --%>
-
-    <%-- for(BoardBean board: boardList)  { --%>
-    <%-- board.getTitle() --%>
-    <%-- } --%>
-    <%-- 위에것들을 간편하게 --%>
-    <c:forEach items="${boardList}" var="board" varStatus="status">
-    <%-- 0부터 5까지  boardList가 value로 튀어나옴 --%>
-    <div>
-        ${board.title} : ${status.count}, ${status.index}, ${status.first}, ${status.last}
-        <%-- first는 첫번째냐? 맞으면 true last도 마지막이냐? 맞으면 true --%>
-    </div>
+    <div>jstl for </div>
+    <%--for(int i = 0; i <boardList.size(); i++){--%>
+    <%--BoardBean value =  boardList.get(i)--%>
+    <%--}--%>
+    <%--for(BoardBean board: boardList){--%>
+    <%--board.getTitle()--%>
+    <%--}--%>
+    <c:forEach var="board" items="${boardList}" varStatus="status">
+        <div>${board.title}, ${board.userName} : ${status.count}, ${status.index}, ${status.first}, ${status.last}</div>
     </c:forEach>
-
-
     <div class="container">
         <table class="table">
             <thead>
                 <tr>
                     <th scope=>#</th>
-                    <th class="col-9" scope=>Title</th>
-                    <th scope=>user name</th>
+                    <th scope=class="">Title</th>
+                    <th scope=class="">Title with Path</th>
                     <th scope=>date</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope=>1</th>
-                    <td><a href="/board_our/view?uid=${boardList.title}">${boardList.title}</a></td>
+                    <td><a href="/board_our/view?uid=Hello">Hello</a></td>
+                    <td><a href="/board_our/view/Hello">Hello</a></td>
                     <td>Mark</td>
                     <td>22.11.11</td>
                 </tr>
                 <tr>
-                    <th scope=>1</th>
+                    <th scope=>2</th>
                     <td><a href="/board_our/view?uid=Otto">Otto</a></td>
+                    <td><a href="/board_our/view/Otto">Otto</a></td>
                     <td>Mark</td>
                     <td>22.11.11</td>
                 </tr>
                 <tr>
-                    <th scope=>1</th>
+                    <th scope=>3</th>
                     <td><a href="/board_our/view?uid=Jasco">Jasco</a></td>
+                    <td><a href="/board_our/view/Jasco">Jasco</a></td>
                     <td>Mark</td>
                     <td>22.11.11</td>
                 </tr>

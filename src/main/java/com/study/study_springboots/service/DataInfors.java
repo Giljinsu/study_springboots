@@ -91,5 +91,20 @@ public class DataInfors {
         membersList.add(boardBean);
         return membersList;
     }
+
+    public BoardBean addObject(HashMap<String,String> hashMap) {
+        String title = hashMap.get("title");
+        String content = hashMap.get("content");
+        String userName = hashMap.get("userName");
+        String date = hashMap.get("date");
+
+        BoardBean bean = new BoardBean();
+        bean.setTitle(title);
+        bean.setContent(content);
+        bean.setUserName(userName);
+        bean.setDate(date);
+
+        return bean;
+    }
     
 }
