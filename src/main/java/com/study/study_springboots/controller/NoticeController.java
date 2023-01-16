@@ -38,6 +38,7 @@ public class NoticeController {
         }
         @RequestMapping(value = "/save", method = RequestMethod.POST)
         public ModelAndView view(@RequestParam HashMap<String,String> hashMap) {
+                //매개변수에서 선언하는건 서블릿이 부담이 가니까 내부에서 선언하는것이 더 좋다고 함
                 DataInfors dataInfors = new DataInfors();
                 BoardBean boardBean = dataInfors.addDataBean(hashMap);
                 ModelAndView modelAndView = new ModelAndView();
