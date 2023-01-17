@@ -15,6 +15,7 @@
     <div> <a href="/board/form">/board/form BoardController form() /board/form.jsp</a> </div>
     <div> <a href="/board_our/list">/board_our BoardOurController list() /board_our/list.jsp</a> </div>
     <div> <a href="/jstlformats">jstl_formats.jsp</a> </div>
+    <div> <a href="/commonCode/list">/commonCode/list.jsp</a> </div>
 
 </body>
 

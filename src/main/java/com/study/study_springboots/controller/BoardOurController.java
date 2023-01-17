@@ -3,6 +3,7 @@ package com.study.study_springboots.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,9 @@ import com.study.study_springboots.service.DataInfors;
 @Controller
 @RequestMapping(value = "/board_our")
 public class BoardOurController {
+    
+    @Autowired //Bean에 올려진거를 사용하는거다.
+    DataInfors dataInfors;// 이것이 DI new를 안붙이는이유: Bean에 올려놔서 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)   // /board_our/edit 위에꺼랑 합해쳐서 이런식으로 돼
     public ModelAndView edit(ModelAndView modelAndView) { //spring은 이전에 인스턴스화 되어있다 따라서 매개로 넣으면 바로 사용가능
         modelAndView.setViewName("board_our/edit");
@@ -32,7 +36,7 @@ public class BoardOurController {
     public ModelAndView list() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("firstString", "firstValue");
-        DataInfors dataInfors = new DataInfors();
+        // DataInfors dataInfors = new DataInfors();
         ArrayList<BoardBean> boardList = dataInfors.getDataListWithBoardBean();
         modelAndView.addObject("boardList", boardList);
         
@@ -44,7 +48,7 @@ public class BoardOurController {
     public ModelAndView view(@PathVariable String action_uid, ModelAndView modelAndView) { //spring은 이전에 인스턴스화 되어있다 따라서 매개로 넣으면 바로 사용가능
         // action_uid는 servlet에서 넘어오는 변수야 라는 것을 표현해야함
         System.out.println(action_uid);
-        DataInfors dataInfors = new DataInfors();
+        // DataInfors dataInfors = new DataInfors();
         BoardBean boardBean = dataInfors.getDataWithMamberBean(action_uid);
         modelAndView.addObject("boardBean", boardBean);
 

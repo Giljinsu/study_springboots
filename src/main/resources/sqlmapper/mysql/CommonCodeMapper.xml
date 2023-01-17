@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommonCode">
+    <!-- call CommonCode.selectCommon_Code_idNameOrder_Number -->
+    <select id="selectCommon_Code_idNameOrder_Number" 
+        parameterType="Map" resultType="Map">
+        SELECT COMMON_CODE_ID, NAME, ORDER_NUMBER 
+        FROM cip_common_code
+    </select>
+</mapper>

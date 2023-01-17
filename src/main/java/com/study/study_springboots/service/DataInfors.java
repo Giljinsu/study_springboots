@@ -3,8 +3,11 @@ package com.study.study_springboots.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Service;
+
 import com.study.study_springboots.beans.BoardBean;
 
+@Service(value = "")//value는 이름을 설정 근데 거의 사용x 보통 carmel법으로 클래스이름으로 등록됨
 public class DataInfors {
     public HashMap<String, String> getSearchFormData() {
         HashMap<String, String> searchForm = new HashMap<String, String>();
