@@ -23,7 +23,26 @@
         <!-- 반환값 업스니까 resultType 삭제 -->
         UPDATE CIP_COMMON_CODE 
         SET NAME=#{NAME}, 
-            MODIFY_DATE=sysdate()
+            MODIFY_DATE=sysdate(),
+            ORDER_NUMBER=#{ORDER_NUMBER},
+            DESCRIPTION=#{DESCRIPTION},
+        <choose>
+            <when test="SYSTEM_CODE_YN != null">
+            <!-- ${}이 표시 안해도 됨 -->
+               SYSTEM_CODE_YN ='System_Code_Yes',
+            </when>
+            <otherwise>
+                SYSTEM_CODE_YN = 'System_Code_No',
+            </otherwise>
+        </choose>
+                <choose>
+            <when test="USE_YN != null">
+                USE_YN='Yes'
+            </when>
+            <otherwise>
+                USE_YN='No'
+            </otherwise>
+        </choose>
         WHERE COMMON_CODE_ID = #{COMMON_CODE_ID}
     </update>
 
@@ -45,18 +64,18 @@
         <choose>
             <when test="SYSTEM_CODE_YN != null">
             <!-- ${}이 표시 안해도 됨 -->
-                , 'yes'
+                , 'System_Code_Yes'
             </when>
             <otherwise>
-                , 'no'
+                , 'System_Code_No'
             </otherwise>
         </choose>
                 <choose>
             <when test="USE_YN != null">
-                , 'yes'
+                , 'Yes'
             </when>
             <otherwise>
-                , 'no'
+                , 'No'
             </otherwise>
         </choose>
         ,NULL,#{REGISTER_SEQ},sysdate(),#{MODIFIER_SEQ},sysdate())
