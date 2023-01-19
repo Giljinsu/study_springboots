@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CommonCodeOur">
+    <!-- call CommonCodeOur.selectListByUID -->
+    <select id="selectListByUID" 
+        parameterType="Map" resultType="Map">
+        SELECT *
+        FROM CIP_COMMON_CODE
+    </select>
+    
+    <!-- call CommonCodeOur.selectByUID -->
+    <select id="selectByUID" 
+    parameterType="Map" resultType="Map">
+        SELECT *
+        FROM CIP_COMMON_CODE
+        WHERE COMMON_CODE_ID = #{COMMON_CODE_ID}
+    </select>
+
+    <!-- call CommonCodeOur.updateByUID -->
+    <update id="updateByUID" 
+        parameterType="Map" >
+        <!-- 반환값 업스니까 resultType 삭제 -->
+        UPDATE CIP_COMMON_CODE 
+        SET NAME=#{NAME}, 
+            MODIFY_DATE=sysdate()
+        WHERE COMMON_CODE_ID = #{COMMON_CODE_ID}
+    </update>
+
+    <!-- call CommonCodeOur.deleteByUID -->
+    <delete id="deleteByUID" 
+        parameterType="Map" >
+        <!-- 반환값 없으니까 resultType 삭제 -->
+        DELETE FROM CIP_COMMON_CODE
+        WHERE COMMON_CODE_ID = #{COMMON_CODE_ID}
+    </delete>
+
+        <!-- call CommonCodeOur.insertWithUID -->
+    <insert id="insertWithUID" 
+        parameterType="Map" >
+        insert into CIP_COMMON_CODE 
+        (COMMON_CODE_ID,NAME,ORDER_NUMBER,ATTRIBUTION_1,ATTRIBUTION_2,DESCRIPTION,
+        SYSTEM_CODE_YN,USE_YN,PARENT_COMMON_CODE_ID,REGISTER_SEQ,REGISTRY_DATE,MODIFIER_SEQ,MODIFY_DATE) 
+        VALUE (#{COMMON_CODE_ID},#{NAME},#{ORDER_NUMBER},NULL,NULL,#{DESCRIPTION}
+        <choose>
+            <when test="SYSTEM_CODE_YN != null">
+            <!-- ${}이 표시 안해도 됨 -->
+                , 'yes'
+            </when>
+            <otherwise>
+                , 'no'
+            </otherwise>
+        </choose>
+                <choose>
+            <when test="USE_YN != null">
+                , 'yes'
+            </when>
+            <otherwise>
+                , 'no'
+            </otherwise>
+        </choose>
+        ,NULL,#{REGISTER_SEQ},sysdate(),#{MODIFIER_SEQ},sysdate())
+    </insert>
+</mapper>
