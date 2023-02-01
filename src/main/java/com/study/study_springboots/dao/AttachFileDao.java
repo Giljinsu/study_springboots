@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 
 // @Repository
 @Component
-public class CommonCodeOurDao {
+public class AttachFileDao {
     @Autowired
     private SqlSessionTemplate sessionTemplate;
     public Object getList(String sqlMapId, Object dataMap) {
 
-        Object result = sessionTemplate.selectList(sqlMapId,dataMap);
+        Object result = sessionTemplate.selectList(sqlMapId, dataMap);
         return result;
     }
 

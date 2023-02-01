@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/resources/static/files/aa.txt
+src/main/resources/static/files/it_Icon.png

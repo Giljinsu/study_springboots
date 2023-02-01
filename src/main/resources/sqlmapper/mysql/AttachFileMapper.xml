@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AttachFile">
+    <!-- call AttachFile.selectListByUID -->
+    <select id="selectListByUID" 
+        parameterType="Map" resultType="Map">
+        SELECT *
+        FROM CIP_ATTACHFILE
+        WHERE SOURCE_UNIQUE_SEQ = #{SOURCE_UNIQUE_SEQ};
+    </select>
+
+    <!-- call AttachFile.insertMulti -->
+    <insert id="insertMulti" parameterType="Map" >
+        INSERT INTO CIP_ATTACHFILE
+        (ATTACHFILE_SEQ, SOURCE_UNIQUE_SEQ, ORGINALFILE_NAME, PHYSICALFILE_NAME, 
+        REGISTER_SEQ, REGISTRY_DATE, MODIFIER_SEQ, MODIFY_DATE)
+        values
+        <!-- ('2023.01.26125052','TEMP_29','cast.txt','20230126_112456'
+        ,'UUID-1111-1111111',SYSDATE(),'UUID-1111-1111111',SYSDATE()),
+        ('2023.01.26125052','TEMP_29','cast.txt','20230126_112456'
+        ,'UUID-1111-1111111',SYSDATE(),'UUID-1111-1111111',SYSDATE()) -->
+        <foreach collection="attachfiles" item="attachfile"
+            open="(" close=")" separator="),(">
+        #{attachfile.ATTACHFILE_SEQ},#{attachfile.SOURCE_UNIQUE_SEQ},#{attachfile.ORGINALFILE_NAME},#{attachfile.PHYSICALFILE_NAME}
+        ,#{attachfile.REGISTER_SEQ},SYSDATE(),#{attachfile.MODIFIER_SEQ},SYSDATE()
+        </foreach>
+        ;
+    </insert>
+
+</mapper>

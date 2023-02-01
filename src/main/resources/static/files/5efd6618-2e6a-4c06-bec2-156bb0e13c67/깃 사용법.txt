@@ -1,0 +1,2 @@
+cmd 들어가서 git clone
+git clone 이란 리모트에서 가져옴

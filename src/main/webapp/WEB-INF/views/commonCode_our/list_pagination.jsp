@@ -22,16 +22,18 @@
 </div>
 <%-- pagination --%>
 <nav aria-label="Page navigation example">	
-  <span>총 갯수 : </span>
+<c:set var="_pagination" value="${resultMap.paginations}" />
+  <span>총 갯수 : ${_pagination.totalCount}</span>
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+	<%-- for(int i=0 ; i<9; i++) --%>
+	<c:forEach var="i" begin="${_pagination.blockStart}" end="${_pagination.blockEnd}">
+		<li class="page-item"><a class="page-link" href="/commonCodeOur/listPagination/${i}">${i}</a></li>
+	</c:forEach>
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -41,8 +43,7 @@
 </nav>
 <form action="/commonCodeOur/deleteMulti" method="post">
     <button class="btn btn-info">deleteMulti</button>
-	<%-- <form></form>  --%>
-	<%-- 더미 form --%>
+	<form></form>
 <table class="table table-striped table-hover table-bordered">
 	<thead>
 		<tr class="text-center">
@@ -55,7 +56,7 @@
 					</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${resultMap}" var="resultData" varStatus="loop">
+		<c:forEach items="${resultMap.resultList}" var="resultData" varStatus="loop">
 			<tr>
 				<td class="text-center"><input type="checkbox" class="checkbox"
 					name="COMMON_CODE_ID" value="${resultData.COMMON_CODE_ID}"  /></td>
@@ -64,10 +65,6 @@
 					<button class="btn btn-link viewPopup" type=""
 						>${resultData.COMMON_CODE_ID}</button>
 					</form>
-					<%-- <button class="btn btn-link viewPopup" type=""
-						formaction="/commonCodeOur/edit/${resultData.COMMON_CODE_ID}" formmethod="get"
-						>${resultData.COMMON_CODE_ID}</button> --%>
-					<%-- form 태그를 안둘러싸도 이런식으로 가능하다 --%>
 				</td>
 				<td>
 					<form action="/commonCodeOur/editMulti/${resultData.COMMON_CODE_ID}" method="get">
